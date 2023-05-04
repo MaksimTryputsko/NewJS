@@ -5,18 +5,11 @@ const test = document.querySelector('.test')
 test.style.width = '100px'
 test.style.height = '100px'
 test.addEventListener('click', function(){
-    test.style.width = '100px'
-    test.style.height = '100px'
-    const newWidth = test.style.width
-    const newWidth2 = Number(newWidth.replace(/\D/g,''))
-    const newHeight = test.style.height
-    const newHeight2 = Number(newHeight.replace(/\D/g,''))
-    return test.innerHTML = `Square is ${newWidth2 * newHeight2}`
+    const newWidth = Number(test.style.width.replace(/\D/g,''))
+    const newHeight = Number(test.style.height.replace(/\D/g,''))
+    return test.innerHTML = `Square is ${newWidth * newHeight}`
 })
-// test.addEventListener('mouseout', function(e){
-//     return test.innerHTML = ''
-//     })
-////////////////////////////////////////////////////////////////////
+
 
 //// Task2 //////////////
 "use strict"
@@ -56,21 +49,22 @@ const testDd1 = document.querySelector('.test_dd1')
 const testWrapperDd2 = document.querySelector('.test_wrapper-dd2')
 const testDd2 = document.querySelector('.test_dd2')
 
-testDd1.ondragover = allowDrop;
-testWrapperDd2.ondragover = allowDrop;
+testDd1.addEventListener("dragover", allowDrop);
+testWrapperDd2.addEventListener("dragover",allowDrop);
 
 function allowDrop(event){
     event.preventDefault();
 }
-testDd2.ondragstart = drag;
+
+testDd2.addEventListener("dragstart", drag);
 function drag (event) {
     event.dataTransfer.setData('id', event.target.id);
 }
 
-testDd1.ondrop = drop;
-testWrapperDd2.ondrop = drop;
+
+testDd1.addEventListener("drop", drop);
+testWrapperDd2.addEventListener("drop", drop);
 function drop (event) {
     let itemId = event.dataTransfer.getData('id')
-    console.log(itemId)
     event.target.append(document.getElementById(itemId))
 }
